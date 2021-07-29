@@ -9,13 +9,10 @@ class dataManager
 
     public :
         /*Constructor*/
-        dataManager(std::string path)
-            :
-        filepath(path),
-        ID(0)
-        {
-            std::cout << "Constructing data manager..." << std::endl;
-        };
+        dataManager(std::string path);
+
+
+        void openExcelFile() {};
 
 
 };
