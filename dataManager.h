@@ -1,4 +1,9 @@
-#include <xlnt/xlnt.hpp>
+#include <iostream>
+#include<string>
+
+#include "NumCpp.hpp"
+#include <cstdlib>
+
 
 class dataManager
 {
@@ -12,7 +17,7 @@ class dataManager
         dataManager(std::string path);
 
 
-        void openExcelFile() {};
+        void openExcelFile();
 
 
 };

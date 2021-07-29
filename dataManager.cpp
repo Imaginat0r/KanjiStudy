@@ -1,6 +1,5 @@
 #include "dataManager.h"
 
-
 dataManager::dataManager(std::string path)
 :
         filepath(path),
@@ -9,7 +8,7 @@ dataManager::dataManager(std::string path)
             std::cout << "Constructing data manager..." << std::endl;
         };
 
-void openExcelFile()
+void dataManager::openExcelFile()
 {
-
+   //nc::load<std::string>(filepath);
 };
