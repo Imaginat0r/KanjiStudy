@@ -11,7 +11,9 @@ CONFIG += c++14
 SOURCES += \
     dataManager.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    C:/DataFrame/src/Vectors/HeteroVector.cc
+
 
 HEADERS += \
     dataManager.h \
@@ -26,4 +28,11 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 INCLUDEPATH += "C:/NumCpp/include" \
-"C:\Users\brahm\Downloads\boost_1_77_0_b1\boost_1_77_0"
+"C:\Users\brahm\Downloads\boost_1_77_0_b1\boost_1_77_0" \
+"C:\DataFrame\include"
+
+DISTFILES += \
+    Kanji.npy \
+    data/Kanji.csv \
+    data/Kanji.npy \
+    data/Vocabulary.csv

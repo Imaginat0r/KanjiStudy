@@ -10,5 +10,10 @@ dataManager::dataManager(std::string path)
 
 void dataManager::openExcelFile()
 {
-   //nc::load<std::string>(filepath);
+    using MyDataFrame = hmdf::StdDataFrame<unsigned long>;
+
+    MyDataFrame df;
+
+    //Lecture du fichier csv
+    std::future<bool> fut = df.read_async("test.csv");
 };

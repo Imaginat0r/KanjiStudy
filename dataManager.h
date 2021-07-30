@@ -1,8 +1,17 @@
 #include <iostream>
 #include<string>
 
-#include "NumCpp.hpp"
-#include <cstdlib>
+#include <DataFrame/DataFrame.h>
+#include <DataFrame/DataFrameFinancialVisitors.h>
+#include <DataFrame/DataFrameMLVisitors.h>
+#include <DataFrame/DataFrameOperators.h>
+#include <DataFrame/DataFrameStatsVisitors.h>
+#include <DataFrame/RandGen.h>
+
+#include <cassert>
+#include <cmath>
+#include <limits>
+#include <typeinfo>
 
 
 class dataManager
