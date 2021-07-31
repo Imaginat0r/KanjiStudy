@@ -1,8 +1,9 @@
 #include "dataManager.h"
 
-dataManager::dataManager(std::string path)
+dataManager::dataManager(QString path, MainWindow &ui)
 :
         filepath(path),
+        ui(&ui),
         ID(0)
         {
             std::cout << "Constructing data manager..." << std::endl;
@@ -10,10 +11,6 @@ dataManager::dataManager(std::string path)
 
 void dataManager::openExcelFile()
 {
-    using MyDataFrame = hmdf::StdDataFrame<unsigned long>;
 
-    MyDataFrame df;
 
-    //Lecture du fichier csv
-    std::future<bool> fut = df.read_async("test.csv");
 };

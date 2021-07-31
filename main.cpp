@@ -1,16 +1,15 @@
 #include "mainwindow.h"
-#include "dataManager.h"
 
 #include <QApplication>
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
+    MainWindow w(nullptr, "C:\\Users\\brahm\\PROJETS_TRAVAIL_PDF\\PROJETS\\C++\\Kanji_Quiz\\Kanji_Study\\data\\Kanji.csv"
+,"C:\\Users\\brahm\\PROJETS_TRAVAIL_PDF\\PROJETS\\C++\\Kanji_Quiz\\Kanji_Study\\data\\Vocabulary.csv");
 
-    dataManager dm("Kanji.npy");
-    dm.openExcelFile();
+    w.loadData();
 
-    MainWindow w;
     w.show();
     return a.exec();
 }

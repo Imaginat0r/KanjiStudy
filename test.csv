@@ -280,7 +280,6 @@ N3;失;erreur, faute, perdre (un objet);シツ  /  うしな.う
 N2;奥;intérieur, cœur, épouse;オウ  /  おく, おく.まる, くま
 N5;女;femme, féminin;ジョ, ニョ, ニョウ  /  おんな, め
 N4;好;bien aimé, apprécié, agréable;コウ  /  この.む, す.く, よ.い,
-;;;
 N4;妹;sœur cadette, petite-sœur;マイ  /  いもうと
 N3;妻;épouse, femme;サイ  /  つま
 N4;姉;sœur ainée, grande-sœur;シ  /  あね
@@ -1018,8 +1017,7 @@ N3;過;dépasser, excéder;カ  /  す.ぎる, あやま.つ
 N5;道;voie, route, chemin;ドウ  /  みち
 N3;達;atteindre, arriver, suffixe du pluriel;タツ, ダ  /  たち
 N3;違;différer, différence, être différent;イ  /  ちが.う, ちが.い, ちが.
-える;;;
-N4;遠;loin, distant;エン, オン  /  とお.い
+えるN4;遠;loin, distant;エン, オン  /  とお.い
 N3;適;approprié, qualifié, convenable;テキ  /  かな.う
 N3;選;choisir, sélectionner, élection;セン  /  えら.ぶ
 N2;郊;périphérie, banlieue;コウ  /  -

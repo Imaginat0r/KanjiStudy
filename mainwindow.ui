@@ -17,27 +17,14 @@
    <widget class="QPushButton" name="nextButton">
     <property name="geometry">
      <rect>
-      <x>740</x>
+      <x>660</x>
       <y>520</y>
-      <width>141</width>
+      <width>161</width>
       <height>61</height>
      </rect>
     </property>
     <property name="text">
      <string>Suivant &gt;</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="previousButton">
-    <property name="geometry">
-     <rect>
-      <x>130</x>
-      <y>520</y>
-      <width>141</width>
-      <height>61</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>&lt; Précédent</string>
     </property>
    </widget>
    <widget class="QFrame" name="frame">
@@ -58,15 +45,15 @@
     <widget class="QLabel" name="kanjiLabel">
      <property name="geometry">
       <rect>
-       <x>280</x>
-       <y>70</y>
-       <width>211</width>
+       <x>120</x>
+       <y>60</y>
+       <width>531</width>
        <height>121</height>
       </rect>
      </property>
      <property name="font">
       <font>
-       <pointsize>48</pointsize>
+       <pointsize>72</pointsize>
       </font>
      </property>
      <property name="text">
@@ -79,11 +66,16 @@
     <widget class="QLabel" name="idLabel">
      <property name="geometry">
       <rect>
-       <x>320</x>
+       <x>310</x>
        <y>10</y>
        <width>141</width>
        <height>71</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>11</pointsize>
+      </font>
      </property>
      <property name="text">
       <string>ID</string>
@@ -96,10 +88,15 @@
      <property name="geometry">
       <rect>
        <x>310</x>
-       <y>180</y>
+       <y>190</y>
        <width>141</width>
        <height>71</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>12</pointsize>
+      </font>
      </property>
      <property name="text">
       <string>LVL</string>
@@ -111,11 +108,16 @@
     <widget class="QLabel" name="readingLabel">
      <property name="geometry">
       <rect>
-       <x>310</x>
-       <y>350</y>
-       <width>141</width>
-       <height>71</height>
+       <x>10</x>
+       <y>240</y>
+       <width>741</width>
+       <height>91</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>28</pointsize>
+      </font>
      </property>
      <property name="text">
       <string>Reading</string>
@@ -127,11 +129,16 @@
     <widget class="QLabel" name="translationLabel">
      <property name="geometry">
       <rect>
-       <x>320</x>
-       <y>240</y>
-       <width>141</width>
-       <height>71</height>
+       <x>20</x>
+       <y>340</y>
+       <width>721</width>
+       <height>91</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>24</pointsize>
+      </font>
      </property>
      <property name="text">
       <string>Translation</string>
@@ -144,10 +151,10 @@
    <widget class="QPushButton" name="pushButton">
     <property name="geometry">
      <rect>
-      <x>460</x>
-      <y>620</y>
-      <width>121</width>
-      <height>41</height>
+      <x>130</x>
+      <y>520</y>
+      <width>161</width>
+      <height>61</height>
      </rect>
     </property>
     <property name="text">
@@ -157,9 +164,9 @@
    <widget class="QPushButton" name="answerButton">
     <property name="geometry">
      <rect>
-      <x>450</x>
+      <x>390</x>
       <y>520</y>
-      <width>141</width>
+      <width>161</width>
       <height>61</height>
      </rect>
     </property>
@@ -178,6 +185,67 @@
     </property>
     <property name="orientation">
      <enum>Qt::Horizontal</enum>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="includeKanjiCheckBox">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>220</y>
+      <width>91</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Include Kanji</string>
+    </property>
+    <property name="checked">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="includeVocabularyCheckBox">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>240</y>
+      <width>121</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Include Vocabulary</string>
+    </property>
+    <property name="checked">
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="showLevelCheckBox">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>350</y>
+      <width>121</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Show Level ?</string>
+    </property>
+    <property name="checked">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="showDetailsButton">
+    <property name="geometry">
+     <rect>
+      <x>660</x>
+      <y>600</y>
+      <width>161</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Show Details</string>
     </property>
    </widget>
   </widget>

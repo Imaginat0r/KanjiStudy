@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>dataManagerWindow</class>
+ <widget class="QDialog" name="dataManagerWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1318</width>
+    <height>532</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <widget class="QTableWidget" name="KanjiTable">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>30</y>
+     <width>601</width>
+     <height>301</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QTableWidget" name="VocabularyTable">
+   <property name="geometry">
+    <rect>
+     <x>650</x>
+     <y>30</y>
+     <width>631</width>
+     <height>301</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="removeSelectionKanjiButton">
+   <property name="geometry">
+    <rect>
+     <x>240</x>
+     <y>340</y>
+     <width>201</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Remove selection</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="removeSelectionVocabularyButton">
+   <property name="geometry">
+    <rect>
+     <x>870</x>
+     <y>340</y>
+     <width>201</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Remove selection</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="addKanjiButton">
+   <property name="geometry">
+    <rect>
+     <x>200</x>
+     <y>460</y>
+     <width>201</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Ajouter le Kanji</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="addVocabularyButton">
+   <property name="geometry">
+    <rect>
+     <x>910</x>
+     <y>460</y>
+     <width>201</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Ajouter le mot de vocabulaire</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="returnButton">
+   <property name="geometry">
+    <rect>
+     <x>560</x>
+     <y>480</y>
+     <width>171</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Retour</string>
+   </property>
+  </widget>
+  <widget class="QSpinBox" name="KanjiLvlEntry">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>380</y>
+     <width>61</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="minimum">
+    <number>1</number>
+   </property>
+   <property name="maximum">
+    <number>5</number>
+   </property>
+  </widget>
+  <widget class="QPlainTextEdit" name="KanjiEntry">
+   <property name="geometry">
+    <rect>
+     <x>120</x>
+     <y>380</y>
+     <width>104</width>
+     <height>31</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QPlainTextEdit" name="KanjiReadingEntry">
+   <property name="geometry">
+    <rect>
+     <x>250</x>
+     <y>380</y>
+     <width>171</width>
+     <height>31</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QPlainTextEdit" name="KanjiTranslationEntry">
+   <property name="geometry">
+    <rect>
+     <x>440</x>
+     <y>380</y>
+     <width>171</width>
+     <height>31</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>420</y>
+     <width>47</width>
+     <height>13</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Level</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_2">
+   <property name="geometry">
+    <rect>
+     <x>160</x>
+     <y>420</y>
+     <width>47</width>
+     <height>13</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Kanji</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_3">
+   <property name="geometry">
+    <rect>
+     <x>310</x>
+     <y>420</y>
+     <width>47</width>
+     <height>13</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Reading</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_4">
+   <property name="geometry">
+    <rect>
+     <x>490</x>
+     <y>420</y>
+     <width>61</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Translation</string>
+   </property>
+  </widget>
+  <widget class="QPlainTextEdit" name="VocabularyReadingEntry">
+   <property name="geometry">
+    <rect>
+     <x>990</x>
+     <y>390</y>
+     <width>161</width>
+     <height>31</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QSpinBox" name="VocabularyLvlEntry">
+   <property name="geometry">
+    <rect>
+     <x>690</x>
+     <y>390</y>
+     <width>61</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="minimum">
+    <number>1</number>
+   </property>
+   <property name="maximum">
+    <number>5</number>
+   </property>
+  </widget>
+  <widget class="QPlainTextEdit" name="VocabularyTranslationEntry">
+   <property name="geometry">
+    <rect>
+     <x>1170</x>
+     <y>390</y>
+     <width>121</width>
+     <height>31</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_5">
+   <property name="geometry">
+    <rect>
+     <x>1050</x>
+     <y>430</y>
+     <width>47</width>
+     <height>13</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Reading</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_6">
+   <property name="geometry">
+    <rect>
+     <x>830</x>
+     <y>420</y>
+     <width>101</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Mot de vocabulaire</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_7">
+   <property name="geometry">
+    <rect>
+     <x>1200</x>
+     <y>430</y>
+     <width>61</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Translation</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_8">
+   <property name="geometry">
+    <rect>
+     <x>710</x>
+     <y>430</y>
+     <width>47</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Level</string>
+   </property>
+  </widget>
+  <widget class="QPlainTextEdit" name="VocabularyEntry">
+   <property name="geometry">
+    <rect>
+     <x>790</x>
+     <y>390</y>
+     <width>181</width>
+     <height>31</height>
+    </rect>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
