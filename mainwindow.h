@@ -12,6 +12,7 @@
 
 
 #include "boost/regex.hpp"
+#include "helpers.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -35,8 +36,22 @@ public:
     void removeVocabularySelection(QList<QTableWidgetItem *> selections);
     void saveVocabulary();
 
-    void showDetails();
+    void generateIDs();
+    std::vector<int> findKanjis(QStringList KanjiToFind);
+    std::vector<bool> matchInVector(std::vector<QString> Vec, QString ElementToMatch);
+    std::vector<int> searchKanjiEntry(QStringList Entry);
+    std::vector<int> searchVocabularyEntry(QStringList Entry);
 
+    std::vector<QString> getKanji(std::vector<int> idx = {});
+    std::vector<QString> getKanji_lvl(std::vector<int> idx = {});
+    std::vector<QString> getKanji_Translation(std::vector<int> idx = {});
+    std::vector<QString> getKanji_Reading(std::vector<int> idx = {});
+
+    std::vector<QString> getVocabulary(std::vector<int> idx = {});
+    std::vector<QString> getVocabulary_lvl(std::vector<int> idx = {});
+    std::vector<QString> getVocabulary_Translation(std::vector<int> idx = {});
+    std::vector<QString> getVocabulary_Reading(std::vector<int> idx = {});
+    
 
 private slots:
 
@@ -68,11 +83,13 @@ private:
     std::vector<QString> Kanji_LVL;
     std::vector<QString> Kanji_Reading;
     std::vector<QString> Kanji_Translation;
+    std::vector<QString> Kanji_ID;
 
     std::vector<QString> Vocabulary;
     std::vector<QString> Vocabulary_LVL;
     std::vector<QString> Vocabulary_Reading;
     std::vector<QString> Vocabulary_Translation;
+
 
 
 };

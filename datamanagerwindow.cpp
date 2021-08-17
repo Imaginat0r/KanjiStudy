@@ -219,3 +219,95 @@ void dataManagerWindow::on_removeSelectionVocabularyButton_clicked()
     loadData();
 }
 
+void dataManagerWindow::loadKanji(std::vector<int> idx)
+{
+    std::vector<QString> Kanji, Kanji_lvl, Kanji_Reading, Kanji_Translation;
+    Kanji = parentWindow->getKanji(idx);
+    Kanji_lvl = parentWindow->getKanji_lvl(idx);
+    Kanji_Reading = parentWindow->getKanji_Reading(idx);
+    Kanji_Translation = parentWindow->getKanji_Translation(idx);
+
+    ui->KanjiTable->clearContents();
+
+    for (int k = 0; k < Kanji.size(); k++)
+    {
+
+                ui->KanjiTable->setRowCount(k+1);
+
+                ui->KanjiTable->setItem(k,0,new QTableWidgetItem(Kanji_lvl[k]));
+                ui->KanjiTable->setItem(k,1,new QTableWidgetItem(Kanji[k]));
+                ui->KanjiTable->setItem(k,2,new QTableWidgetItem(Kanji_Translation[k]));
+                ui->KanjiTable->setItem(k,3,new QTableWidgetItem(Kanji_Reading[k]));
+
+
+    }
+
+}
+
+void dataManagerWindow::loadVocabulary(std::vector<int> idx)
+{
+    std::vector<QString> Vocabulary, Vocabulary_lvl, Vocabulary_Reading, Vocabulary_Translation;
+    Vocabulary = parentWindow->getVocabulary(idx);
+    Vocabulary_lvl = parentWindow->getVocabulary_lvl(idx);
+    Vocabulary_Reading = parentWindow->getVocabulary_Reading(idx);
+    Vocabulary_Translation = parentWindow->getVocabulary_Translation(idx);
+
+    ui->VocabularyTable->clearContents();
+
+    for (int k = 0; k < Vocabulary.size(); k++)
+    {
+
+                ui->VocabularyTable->setRowCount(k+1);
+
+                ui->VocabularyTable->setItem(k,0,new QTableWidgetItem(Vocabulary_lvl[k]));
+                ui->VocabularyTable->setItem(k,1,new QTableWidgetItem(Vocabulary[k]));
+                ui->VocabularyTable->setItem(k,2,new QTableWidgetItem(Vocabulary_Translation[k]));
+                ui->VocabularyTable->setItem(k,3,new QTableWidgetItem(Vocabulary_Reading[k]));
+
+
+    }
+
+}
+
+
+
+void dataManagerWindow::on_searchKanjiButton_clicked()
+{
+    QStringList Entry;
+    QString E1{ui->KanjiEntry->toPlainText()},
+    E2{ui->KanjiTranslationEntry->toPlainText()},
+    E3{ui->KanjiReadingEntry->toPlainText()};
+    Entry.append(QString::number(ui->KanjiLvlEntry->value()));
+
+    Entry.append(E1);
+    Entry.append(E2);
+    Entry.append(E3);
+
+
+    std::vector<int> indexResult;
+
+    indexResult = parentWindow->searchKanjiEntry(Entry);
+    loadKanji(indexResult);
+}
+
+
+void dataManagerWindow::on_searchVocabularyButton_clicked()
+{
+    QStringList Entry;
+    QString E1{ui->VocabularyEntry->toPlainText()},
+    E2{ui->VocabularyTranslationEntry->toPlainText()},
+    E3{ui->VocabularyReadingEntry->toPlainText()};
+    Entry.append(QString::number(ui->VocabularyLvlEntry->value()));
+
+    Entry.append(E1);
+    Entry.append(E2);
+    Entry.append(E3);
+
+
+    std::vector<int> indexResult;
+
+    indexResult = parentWindow->searchVocabularyEntry(Entry);
+    loadVocabulary(indexResult);
+
+}
+

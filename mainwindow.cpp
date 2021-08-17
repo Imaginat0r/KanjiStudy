@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "datamanagerwindow.h"
+#include "detailswindow.h"
 
 MainWindow::MainWindow(QWidget *parent,QString kanjiPath, QString vocabularyPath)
     : QMainWindow(parent)
@@ -27,6 +28,7 @@ MainWindow::~MainWindow()
 {
     delete ui;
 }
+
 
 void MainWindow::loadData()
 {
@@ -69,7 +71,6 @@ void MainWindow::loadData()
 
     mFile.flush();
     mFile.close();
-
 
     //Load Vocabulary
     QFile mFile2(VocabularyFilePath);
@@ -150,14 +151,14 @@ void MainWindow::on_nextButton_clicked()
         randomListSelector = rand()%2;
     }
 
-
-
     //Vocabulary OR Kanji
     if (randomListSelector==0)
     {
        randomWordSelector = rand() % Kanji.size();
        ui->kanjiLabel->setText(Kanji[randomWordSelector]);
+       ui->kanjiLabel->setWordWrap(true);
        ui->idLabel->setText(QString::number(randomWordSelector));
+
 
        if (ui->showLevelCheckBox->isChecked())
             ui->lvlLabel->setText(Kanji_LVL[randomWordSelector]);
@@ -169,11 +170,17 @@ void MainWindow::on_nextButton_clicked()
     {
         randomWordSelector = rand() % Vocabulary.size();
 
-
         if (Vocabulary[randomWordSelector].isEmpty())
-             ui->kanjiLabel->setText(Vocabulary_Reading[randomWordSelector]);
+        {
+             ui->kanjiLabel->setText(Vocabulary_Reading[randomWordSelector]);             
+        }
         else
+        {
             ui->kanjiLabel->setText(Vocabulary[randomWordSelector]);
+
+        }
+
+        ui->kanjiLabel->setWordWrap(true);
 
         ui->idLabel->setText(QString::number(randomWordSelector));
 
@@ -200,6 +207,9 @@ void MainWindow::on_answerButton_clicked()
         ui->translationLabel->setText(Vocabulary_Translation[randomWordSelector]);
         ui->readingLabel->setText(Vocabulary_Reading[randomWordSelector]);
     }
+
+    ui->translationLabel->setWordWrap(true);
+    ui->readingLabel->setWordWrap(true);
 
 }
 
@@ -261,9 +271,10 @@ void MainWindow::addKanjiEntry(QStringList Entry)
 void MainWindow::saveKanji()
 {
     //Save vectors in csv format
-    QFile file("C:/Users/brahm/PROJETS_TRAVAIL_PDF/PROJETS/C++/Kanji_Quiz/Kanji_Study/test.csv");
+    QFile file("C:/Users/brahm/PROJETS_TRAVAIL_PDF/PROJETS/C++/Kanji_Quiz/Kanji_Study/data/Kanji.csv");
     if (file.open(QFile::WriteOnly|QFile::Truncate))
     {
+        file.resize(0);
         qDebug() << "Writing File...";
         QTextStream stream(&file);
         stream << "Niveau" << ";" << "Kanji" << ";" << "Signification" << ";" << "Lecture ON  /  Lecture KUN" << "\n"; // this writes first line with two columns
@@ -311,16 +322,18 @@ void MainWindow::removeVocabularySelection(QList<QTableWidgetItem *> selections)
 void MainWindow::saveVocabulary()
 {
     //Save vectors in csv format
-    QFile file("C:/Users/brahm/PROJETS_TRAVAIL_PDF/PROJETS/C++/Kanji_Quiz/Kanji_Study/testVocabulary.csv");
+    QFile file("C:/Users/brahm/PROJETS_TRAVAIL_PDF/PROJETS/C++/Kanji_Quiz/Kanji_Study/data/Vocabulary.csv");
+
     if (file.open(QFile::WriteOnly|QFile::Truncate))
     {
+        file.resize(0);
         qDebug() << "Writing File...";
         QTextStream stream(&file);
         stream << "Niveau" << ";" << "Vocabulaire" << ";" << "Signification" << ";" << "Lecture" << "\n"; // this writes first line with two columns
 
         for (int i = 0; i < Vocabulary.size(); i++)
         {
-            stream << "N" << Vocabulary_LVL[i] << ";" << Vocabulary[i] << ";" << Vocabulary_Translation[i] << ";" << Vocabulary_Reading[i] << "\n";
+            stream << "N" << Vocabulary_LVL[i] << ";" << Vocabulary[i] << ";" << Vocabulary_Translation[i] << ";" << Vocabulary_Reading[i];
         }
 
         file.flush();
@@ -328,15 +341,284 @@ void MainWindow::saveVocabulary()
     }
 }
 
-
-void MainWindow::showDetails()
+void MainWindow::generateIDs()
 {
+    std::vector<std::string> IDs;
+
+    for(int i = 0 ; i < Kanji.size() ; i++)
+    {
+        IDs.push_back(string_Hashing((Kanji[i]+Kanji_Translation[i]).toStdString()));
+    }
+
+    QFile file("C:/Users/brahm/PROJETS_TRAVAIL_PDF/PROJETS/C++/Kanji_Quiz/Kanji_Study/IDs.txt");
+    if (file.open(QFile::WriteOnly|QFile::Truncate))
+    {
+        qDebug() << "Writing File...";
+        QTextStream stream(&file);
+        stream << "ID" << "\n"; // this writes first line with two columns
+
+        for (int i = 0; i < Kanji.size(); i++)
+        {
+            stream << QString::fromStdString(IDs[i]) << "\n";
+        }
+
+        file.flush();
+        file.close();
+    }
+
 
 }
+
+
+
+std::vector<int> MainWindow::findKanjis(QStringList KanjiToFind)
+{
+    std::vector<int> indexes;
+    int result;
+
+    for (int i = 0; i < KanjiToFind.size(); i++)
+    {
+
+        result = findInVector(Kanji, KanjiToFind[i]);
+        indexes.push_back(result);
+    }
+
+    return indexes;
+}
+
+
+std::vector<bool> MainWindow::matchInVector(std::vector<QString> Vec, QString ElementToMatch)
+{
+    std::vector<bool> res;
+
+    if (ElementToMatch.isEmpty())
+    {
+        for (int k = 0; k < Vec.size(); k++)
+        {
+            res.push_back(true);
+        }
+        return res;
+    }
+
+
+    for (int k = 0; k < Vec.size(); k++)
+    {
+        res.push_back(Vec[k].contains(ElementToMatch));
+    }
+
+    return res;
+
+}
+
 
 
 void MainWindow::on_showDetailsButton_clicked()
 {
-    showDetails();
+
+    std::vector<int> indexes;
+    std::vector<QStringList> Kanjis;
+
+
+    if (randomListSelector==0)
+    {
+        QStringList KanjiDetail;
+        KanjiDetail.append(Kanji_LVL[randomWordSelector]);
+        KanjiDetail.append(Kanji[randomWordSelector]);
+        KanjiDetail.append(Kanji_Reading[randomWordSelector]);
+        KanjiDetail.append(Kanji_Translation[randomWordSelector]);
+        Kanjis.push_back(KanjiDetail);
+
+    }
+    else
+    {
+        QStringList KanjiToFind;
+
+        for (int k = 0; k < Vocabulary[randomWordSelector].size(); k++)
+            KanjiToFind.append(Vocabulary[randomWordSelector][k]);
+
+        indexes = findKanjis(KanjiToFind);
+
+        for (int i =0; i < indexes.size(); i++)
+        {
+            QStringList KanjiDetail;
+
+            //Si le kanji a été trouvé
+            if (indexes[i] != -1)
+            {
+                KanjiDetail.append(Kanji_LVL[indexes[i]]);
+                KanjiDetail.append(Kanji[indexes[i]]);
+                KanjiDetail.append(Kanji_Reading[indexes[i]]);
+                KanjiDetail.append(Kanji_Translation[indexes[i]]);
+                Kanjis.push_back(KanjiDetail);
+            }
+        }
+
+
+    }
+
+   DetailsWindow *dw = new DetailsWindow(this);
+   dw->DisplayKanjis(Kanjis);
+   dw->show();
+
+   this->hide();
+
 }
 
+std::vector<QString> MainWindow::getKanji(std::vector<int> idx)
+{
+    if (idx.empty())
+        return Kanji;
+    else
+    {
+        std::vector<QString> Res;
+        for (int i = 0; i < idx.size(); ++i)
+           Res.push_back(Kanji[idx[i]]);
+
+        return Res;
+    }
+}
+
+std::vector<QString> MainWindow::getKanji_lvl(std::vector<int> idx)
+{
+    if (idx.empty())
+        return Kanji_LVL;
+    else
+    {
+        std::vector<QString> Res;
+        for (int i = 0; i < idx.size(); ++i)
+           Res.push_back(Kanji_LVL[idx[i]]);
+
+        return Res;
+    }
+
+}
+
+std::vector<QString> MainWindow::getKanji_Translation(std::vector<int> idx)
+{
+    if (idx.empty())
+        return Kanji_Translation;
+    else
+    {
+        std::vector<QString> Res;
+        for (int i = 0; i < idx.size(); ++i)
+           Res.push_back(Kanji_Translation[idx[i]]);
+
+        return Res;
+    }
+}
+
+std::vector<QString> MainWindow::getKanji_Reading(std::vector<int> idx)
+{
+    if (idx.empty())
+        return Kanji_Reading;
+    else
+    {
+        std::vector<QString> Res;
+        for (int i = 0; i < idx.size(); ++i)
+           Res.push_back(Kanji_Reading[idx[i]]);
+
+        return Res;
+    }
+
+}
+
+
+std::vector<QString> MainWindow::getVocabulary(std::vector<int> idx)
+{
+    if (idx.empty())
+        return Vocabulary;
+    else
+    {
+        std::vector<QString> Res;
+        for (int i = 0; i < idx.size(); ++i)
+           Res.push_back(Vocabulary[idx[i]]);
+
+        return Res;
+    }
+}
+
+std::vector<QString> MainWindow::getVocabulary_lvl(std::vector<int> idx)
+{
+    if (idx.empty())
+        return Vocabulary_LVL;
+    else
+    {
+        std::vector<QString> Res;
+        for (int i = 0; i < idx.size(); ++i)
+           Res.push_back(Vocabulary_LVL[idx[i]]);
+
+        return Res;
+    }
+
+}
+
+std::vector<QString> MainWindow::getVocabulary_Translation(std::vector<int> idx)
+{
+    if (idx.empty())
+        return Vocabulary_Translation;
+    else
+    {
+        std::vector<QString> Res;
+        for (int i = 0; i < idx.size(); ++i)
+           Res.push_back(Vocabulary_Translation[idx[i]]);
+
+        return Res;
+    }
+}
+
+std::vector<QString> MainWindow::getVocabulary_Reading(std::vector<int> idx)
+{
+    if (idx.empty())
+        return Vocabulary_Reading;
+    else
+    {
+        std::vector<QString> Res;
+        for (int i = 0; i < idx.size(); ++i)
+           Res.push_back(Vocabulary_Reading[idx[i]]);
+
+        return Res;
+    }
+
+}
+
+
+
+std::vector<int> MainWindow::searchKanjiEntry(QStringList Entry)
+{
+    std::vector<bool> KanjiResult, KanjiLvlResult, KanjiReadingResult,KanjiTranslationResult;
+    std::vector<int> idx;
+
+    KanjiLvlResult = matchInVector(Kanji_LVL,Entry[0]);
+    KanjiResult = matchInVector(Kanji,Entry[1]);
+    KanjiTranslationResult = matchInVector(Kanji_Translation,Entry[2]);
+    KanjiReadingResult = matchInVector(Kanji_Reading,Entry[3]);
+
+    for (int i =0; i < KanjiResult.size(); i++)
+    {
+        if (KanjiLvlResult[i] && KanjiResult[i] && KanjiTranslationResult[i] && KanjiReadingResult[i])
+            idx.push_back(i);
+    }
+
+    return idx;
+}
+
+std::vector<int> MainWindow::searchVocabularyEntry(QStringList Entry)
+{
+    std::vector<bool> VocabularyResult, VocabularyLvlResult, VocabularyReadingResult,VocabularyTranslationResult;
+    std::vector<int> idx;
+
+    VocabularyLvlResult = matchInVector(Vocabulary_LVL,Entry[0]);
+    VocabularyResult = matchInVector(Vocabulary,Entry[1]);
+    VocabularyTranslationResult = matchInVector(Vocabulary_Translation,Entry[2]);
+    VocabularyReadingResult = matchInVector(Vocabulary_Reading,Entry[3]);
+
+    for (int i =0; i < VocabularyResult.size(); i++)
+    {
+        if (VocabularyLvlResult[i] && VocabularyResult[i] && VocabularyTranslationResult[i] && VocabularyReadingResult[i])
+            idx.push_back(i);
+    }
+
+    return idx;
+
+
+}

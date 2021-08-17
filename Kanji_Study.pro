@@ -10,19 +10,21 @@ CONFIG += c++11
 
 SOURCES += \
     datamanagerwindow.cpp \
+    detailswindow.cpp \
+    helpers.cpp \
     main.cpp \
-    mainwindow.cpp \
-    C:/DataFrame/src/Vectors/HeteroVector.cc \
-    C:\DataFrame\src\Utils\DateTime.cc
+    mainwindow.cpp
 
 
 HEADERS += \
     datamanagerwindow.h \
+    detailswindow.h \
     helpers.h \
     mainwindow.h
 
 FORMS += \
     datamanagerwindow.ui \
+    detailswindow.ui \
     mainwindow.ui
 
 # Default rules for deployment.
@@ -30,9 +32,7 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-INCLUDEPATH += "C:/NumCpp/include" \
-"C:\Users\brahm\Downloads\boost_1_77_0_b1\boost_1_77_0" \
-"C:\DataFrame\include"
+INCLUDEPATH += "C:\boost_1_77_0_b1\boost_1_77_0"
 
 
 DISTFILES += \

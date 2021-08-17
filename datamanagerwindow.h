@@ -20,6 +20,8 @@ public:
 
    void loadData();
    void closeEvent(QCloseEvent *event) override;
+   void loadKanji(std::vector<int> idx = {});
+   void loadVocabulary(std::vector<int> idx = {});
 
 private slots:
     void on_returnButton_clicked();
@@ -31,6 +33,10 @@ private slots:
     void on_addVocabularyButton_clicked();
 
     void on_removeSelectionVocabularyButton_clicked();
+
+    void on_searchKanjiButton_clicked();
+
+    void on_searchVocabularyButton_clicked();
 
 private:
     Ui::dataManagerWindow *ui;

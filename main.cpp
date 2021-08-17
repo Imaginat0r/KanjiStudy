@@ -10,6 +10,7 @@ int main(int argc, char *argv[])
 
     w.loadData();
 
+
     w.show();
     return a.exec();
 }
